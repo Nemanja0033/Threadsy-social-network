@@ -2,8 +2,11 @@ import { useEffect, useRef } from "react";
 import { auth, provider } from "../firebaseconfig";
 import { signInWithPopup } from "firebase/auth";
 import gsap from "gsap";
+import { useAuth } from "../context/authContext";
 
-const Login = ({ setIsAuth, setUserName }: { setIsAuth: React.Dispatch<React.SetStateAction<boolean>>; setUserName: React.Dispatch<React.SetStateAction<string>> }) => {
+const Login = () => {
+  const { setIsAuth, setUserName } = useAuth();
+
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider).then((result) => {
       setIsAuth(true);
