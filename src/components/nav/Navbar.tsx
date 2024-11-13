@@ -30,7 +30,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="w-full bg-white flex justify-between items-center h-[60px] shadow-md relative">
+    <div className="w-full bg-white flex justify-between items-center h-[60px] shadow-md relative rounded-md">
       <div className="md:ml-32 ml-3 flex items-center cursor-pointer">
         <img onClick={handleClick} src="/logo/logo.png" className="md:w-1/4 w-1/5" alt="logo" />
         <h1 onClick={handleClick} className="text-gray-700 font-semibold cursor-pointer">DevTalks</h1>

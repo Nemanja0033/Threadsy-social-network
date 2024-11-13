@@ -9,7 +9,7 @@ const PostCard = ({ title, postData, author, date, id, likes }: PostCardType) =>
   const [likesState, setLikesState] = useState<number>(likes.count); 
   const [userHasLiked, setUserHasLiked] = useState<boolean>(likes.users.includes(auth.currentUser?.uid));
   const { toggleLike } = useLikeContext();
-  const currentUser = auth.currentUser?.uid;
+  const currentUser = auth.currentUser?.displayName;
 
   const handleLike = async () => {
     const postRef = doc(db, "posts", id);
@@ -40,9 +40,11 @@ const PostCard = ({ title, postData, author, date, id, likes }: PostCardType) =>
     setUserHasLiked(likes.users.includes(currentUser));
   }, [likes.count, likes.users, currentUser]);
 
+  const openModal = () => { const modal = document.getElementById('my_modal_2') as HTMLDialogElement; if (modal) { modal.showModal(); } };
+
   return (
     <div className="flex justify-center">
-      <div className="w-[600px] mt-6 ml-0 mr-0 flex-row rounded border border-gray-100">
+      <div className="w-[600px] mt-6 ml-0 mr-0 flex-row rounded-xl border border-gray-100">
         <div>
           <h1 className="text-md font-semibold text-start ml-3 mt-3">@{author}</h1>
           <h1 className="text-sm text-start text-gray-400 ml-3">{date}</h1>
@@ -57,7 +59,18 @@ const PostCard = ({ title, postData, author, date, id, likes }: PostCardType) =>
               className={`cursor-pointer hover:text-red-500 ${userHasLiked ? 'text-red-500' : ''}`}
               onClick={handleLike}
             />
-            <span>{likesState}</span>
+            
+          <button onClick={openModal}>{likesState}</button>
+          <dialog id="my_modal_2" className="modal">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg">Likes</h3>
+              <p className="py-4">{likes.users}</p>
+            </div>
+            <form method="dialog" className="modal-backdrop">
+              <button>close</button>
+            </form>
+          </dialog>
+
           </div>
           <MessageSquare className="cursor-pointer hover:text-red-500" />
         </div>
