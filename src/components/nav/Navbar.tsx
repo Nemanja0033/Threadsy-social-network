@@ -35,11 +35,11 @@ const Navbar = () => {
         <img onClick={handleClick} src="/logo/logo.png" className="md:w-1/4 w-1/5" alt="logo" />
         <h1 onClick={handleClick} className="text-gray-700 font-semibold cursor-pointer">DevTalks</h1>
       </div>
-      <div className="md:mr-32 mr-3 flex md:gap-8 gap-4 relative">
+      <div className="md:mr-32 mr-3 flex md:gap-8 gap-4 relative items-center">
         <Link to={'/'}><House className="hover:text-gray-400" /></Link>
 
         {isAuth ? (
-          <div className="relative">
+          <div className="relative flex">
           <button onClick={handleToggleCreateModal}>
             <CirclePlus className="hover:text-gray-400" />
           </button>

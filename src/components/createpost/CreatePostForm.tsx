@@ -13,7 +13,7 @@ const CreatePostForm = () => {
   const newPostRef = useRef(null);
   const { isAuth } = useAuth();
 
-  const postsCollectionRef = collection(db, "posts")
+  const postsCollectionRef = collection(db, "posts");
   const createPost = async () => {
     await addDoc(postsCollectionRef, 
       { title, postData, author: {
@@ -33,7 +33,6 @@ useEffect(() => {
   gsap.from(newPostRef.current, { opacity: 0, x: 50 });
   gsap.to(newPostRef.current, { opacity: 1, x: 0, delay: 0.5 });
 }, []);
-
 
   return (
     <>

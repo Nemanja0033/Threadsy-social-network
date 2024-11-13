@@ -1,7 +1,10 @@
+import Feed from "../components/feed/Feed"
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      <Feed />
+    </div>
   )
 }
 
