@@ -31,10 +31,10 @@ const Login = () => {
     <div ref={loginRef} className="md:w-1/3 w-full flex justify-center justify-self-center md:mt-32  mt-40 bg-white md:shadow-md h-96">
       <div className="flex-row mt-20">
         <div className="flex justify-center items-center">
-          <h1 className="font-semibold md:text-2xl text-3xl">Welcome To The Dev Talks!</h1>
+          <h1 className="font-semibold md:text-4xl text-3xl">Welcome To The Dev Talks!</h1>
         </div>
         <div className="flex justify-center mt-6">
-          <button onClick={signInWithGoogle} className="flex justify-center items-center md:text-xl text-2xl rounded md:gap-1 gap-2 border w-36 hover:bg-gray-100">
+          <button onClick={signInWithGoogle} className="flex justify-center items-center md:text-xl text-2xl rounded md:gap-1 gap-2 border w-36 hover:bg-gray-100 hover:shadow-md">
             Login with 
             <img width="24" height="15" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo" />
           </button>
