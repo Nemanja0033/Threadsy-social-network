@@ -1,6 +1,7 @@
 import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react'
 import { db } from '../../firebaseconfig';
+import PostCard from '../post/PostCard';
 
 const Feed = () => {
 
@@ -18,8 +19,12 @@ const Feed = () => {
     }, [])
 
   return (
-    <div>
-
+    <div className='flex justify-center'>
+      <div className='flex-row md:w-1/2 w-full md:h-[86vh] h-screen md:overflow-auto md:mt-6 mt-0 overflow-hidden bg-white rounded shadow-md'>
+        {postList.map((post) => (
+           <PostCard title={post.title} postData={post.postData} author={post.author.name} />
+        ))}
+      </div>  
     </div>
   )
 }
