@@ -9,7 +9,7 @@ const PostCard = ({ title, postData, author, date, id, likes }: PostCardType) =>
   const [likesState, setLikesState] = useState<number>(likes.count); 
   const [userHasLiked, setUserHasLiked] = useState<boolean>(likes.users.includes(auth.currentUser?.uid));
   const { toggleLike } = useLikeContext();
-  const currentUser = auth.currentUser?.displayName;
+  const currentUser = auth.currentUser?.uid;
 
   const handleLike = async () => {
     const postRef = doc(db, "posts", id);
@@ -50,7 +50,7 @@ const PostCard = ({ title, postData, author, date, id, likes }: PostCardType) =>
           <h1 className="text-sm text-start text-gray-400 ml-3">{date}</h1>
         </div>
         <h1 className="text-2xl ml-3 font-semibold text-center mb-3">{title}</h1>
-        <div className="md:overflow-auto overflow-hidden h-48 w-full ml-1 mr-1 rounded text-center shadow-sm">
+        <div className="md:overflow-auto overflow-hidden max-h-44 min-h-12 w-full ml-1 mr-1 rounded text-center shadow-sm">
           {postData}
         </div>
         <div className="w-full h-7 bg-white rounded flex justify-center gap-8 shadow-sm items-center">
@@ -64,7 +64,7 @@ const PostCard = ({ title, postData, author, date, id, likes }: PostCardType) =>
           <dialog id="my_modal_2" className="modal">
             <div className="modal-box">
               <h3 className="font-bold text-lg">Likes</h3>
-              <p className="py-4">{likes.users}</p>
+              <p className="py-4">{likes.users.join(';')}</p>
             </div>
             <form method="dialog" className="modal-backdrop">
               <button>close</button>
