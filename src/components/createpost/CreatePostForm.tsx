@@ -30,8 +30,8 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
-  gsap.from(newPostRef.current, { opacity: 0, x: 50 });
-  gsap.to(newPostRef.current, { opacity: 1, x: 0, delay: 0.5 });
+  gsap.from(newPostRef.current, { opacity: 0, y: 50 });
+  gsap.to(newPostRef.current, { opacity: 1, y: 0, delay: 0.1 });
 }, []);
 
   return (

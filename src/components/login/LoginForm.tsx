@@ -22,8 +22,8 @@ const LoginForm = () => {
     const loginRef = useRef(null);
   
     useEffect(() => {
-      gsap.from(loginRef.current, { opacity: 0, x: 50 });
-      gsap.to(loginRef.current, { opacity: 1, x: 0, delay: 0.5 });
+      gsap.from(loginRef.current, { opacity: 0, y: 50 });
+      gsap.to(loginRef.current, { opacity: 1, y: 0, delay: 0.1 });
     }, []);
   
     useEffect(() => {

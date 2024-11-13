@@ -1,11 +1,13 @@
 import { collection, getDocs } from 'firebase/firestore';
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { db } from '../../firebaseconfig';
 import PostCard from '../post/PostCard';
+import gsap from 'gsap'
 
 const Feed = () => {
 
     const [postList, setPostList] = useState<any[]>([]);
+    const feedRef = useRef(null);
 
     const postsCollectionRef = collection(db, "posts");
 
@@ -18,8 +20,13 @@ const Feed = () => {
         getPosts();
     }, [])
 
+    useEffect(() => {
+      gsap.from(feedRef.current, { opacity: 0, y: 50 });
+      gsap.to(feedRef.current, { opacity: 1, y: 0, delay: 0.1 });
+    }, []);
+
   return (
-    <div className='flex justify-center'>
+    <div ref={feedRef} className='flex justify-center'>
       <div className='flex-row md:w-1/2 w-full md:h-[86vh] h-screen md:overflow-auto md:mt-6 mt-0 overflow-hidden bg-white rounded shadow-md'>
         {postList.map((post) => (
            <PostCard title={post.title} postData={post.postData} author={post.author.name} />
