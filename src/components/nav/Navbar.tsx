@@ -1,7 +1,7 @@
 import { CirclePlus, House, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../../context/authContext";
 
 const Navbar = () => {
   const { isAuth, userName, setIsAuth } = useAuth();
@@ -38,7 +38,8 @@ const Navbar = () => {
       <div className="md:mr-32 mr-3 flex md:gap-8 gap-4 relative">
         <Link to={'/'}><House className="hover:text-gray-400" /></Link>
 
-        <div className="relative">
+        {isAuth ? (
+          <div className="relative">
           <button onClick={handleToggleCreateModal}>
             <CirclePlus className="hover:text-gray-400" />
           </button>
@@ -56,6 +57,14 @@ const Navbar = () => {
             </div>
           )}
         </div>
+        )
+        :
+        (
+          ''
+        )
+      
+      }
+        
 
         <div className="relative">
           <button onClick={handleToggleUserModal}>

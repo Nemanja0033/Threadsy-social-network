@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreatePost from "./pages/CreatePost";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/nav/Navbar";
 import { AuthProvider } from "./context/authContext";
 
 const App = () => {
