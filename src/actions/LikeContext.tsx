@@ -1,18 +1,14 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-interface Likes {
-  [postId: string]: boolean;
-}
-
 interface LikeContextType {
-  likes: Likes;
+  likes: Record<string, boolean>;
   toggleLike: (postId: string) => void;
 }
 
 const LikeContext = createContext<LikeContextType | null>(null);
 
 export const LikeProvider = ({ children }: { children: ReactNode }) => {
-  const [likes, setLikes] = useState<Likes>({});
+  const [likes, setLikes] = useState<Record<string, boolean>>({});
 
   const toggleLike = (postId: string) => {
     setLikes((prevLikes) => {

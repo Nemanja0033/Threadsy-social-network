@@ -20,10 +20,14 @@ const CreatePostForm = () => {
         name: auth.currentUser?.displayName , 
         id: auth.currentUser?.uid 
       },
-        date: new Date().getTime(),
+      date: new Date().toLocaleString('en-US', {
+        weekday: 'long',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
         likes: {
           count: 0,
-          users: []
+          users: [],
         },
     });
       navigate('/');
