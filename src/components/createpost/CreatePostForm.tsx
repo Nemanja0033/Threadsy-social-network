@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../../firebaseconfig";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
+import { useAnimation } from "../../helpers/useAnimation";
 
 const CreatePostForm = () => {
   let navigate = useNavigate();
@@ -40,10 +40,7 @@ const CreatePostForm = () => {
     document.title = 'Dev Talks | Create a New Post';
   }, []);
 
-  useEffect(() => {
-    gsap.from(newPostRef.current, { opacity: 0, y: 50 });
-    gsap.to(newPostRef.current, { opacity: 1, y: 0, delay: 0.1 });
-  }, []);
+  useAnimation(newPostRef);
 
   return (
     <>

@@ -1,9 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-
-interface LikeContextType {
-  likes: Record<string, boolean>;
-  toggleLike: (postId: string) => void;
-}
+import { LikeContextType } from '../types/LikeContextType';
 
 const LikeContext = createContext<LikeContextType | null>(null);
 

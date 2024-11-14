@@ -39,13 +39,21 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
   };
 
   useEffect(() => {
+    const getUserNames = async () => {
+      if (likes.users.length > 0) {
+        const names = await fetchUserNamesFromPosts(likes.users);
+        setUserNames(names);
+      } else {
+        setUserNames(['No likes yet']);
+      }
+    };
+
+    getUserNames();
+  }, [likes.users]); 
+
+  useEffect(() => {
     setLikesState(likes.count);
     setUserHasLiked(likes.users.includes(currentUser));
-    const getUserNames = async () => {
-      const names = await fetchUserNamesFromPosts(likes.users);
-      setUserNames(names);
-    };
-    getUserNames();
   }, [likes.count, likes.users, currentUser]);
 
   const openModal = () => {

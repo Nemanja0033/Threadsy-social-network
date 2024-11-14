@@ -1,17 +1,7 @@
 import  { createContext, useContext, useState, ReactNode } from "react";
 import { db } from "../firebaseconfig";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
-
-interface Comment {
-  userId: string;
-  text: string;
-  date: number;
-}
-
-interface Post {
-  postId: string;
-  comments: Comment[];
-}
+import { Post } from "../types/Post";
 
 interface CommentContextType {
   addComment: (postId: string, commentText: string) => void;

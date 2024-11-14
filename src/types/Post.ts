@@ -1,4 +1,6 @@
 export type Post = {
+    postId: string;
+    comments: any;
     id: string;
     title: string;
     postData: string;

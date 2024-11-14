@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { auth, provider } from "../../firebaseconfig";
 import { signInWithPopup } from "firebase/auth";
-import gsap from "gsap";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import { useAnimation } from "../../helpers/useAnimation";
 
 const LoginForm = () => {
     let navigate = useNavigate();
@@ -21,10 +21,7 @@ const LoginForm = () => {
     
     const loginRef = useRef(null);
   
-    useEffect(() => {
-      gsap.from(loginRef.current, { opacity: 0, y: 50 });
-      gsap.to(loginRef.current, { opacity: 1, y: 0, delay: 0.1 });
-    }, []);
+    useAnimation(loginRef);
   
     useEffect(() => {
       document.title = 'Dev Talks | Login';

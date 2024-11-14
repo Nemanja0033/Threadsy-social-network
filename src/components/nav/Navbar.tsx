@@ -23,6 +23,7 @@ const Navbar = () => {
     localStorage.removeItem("isAuth");
     localStorage.removeItem("userName");
     setShowUserModal(false);
+    location.reload();
   };
 
   const handleClick = () => {

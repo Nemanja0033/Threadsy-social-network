@@ -2,7 +2,7 @@ import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { db } from '../../firebaseconfig';
 import PostCard from '../post/PostCard';
-import gsap from 'gsap';
+import { useAnimation } from '../../helpers/useAnimation';
 
 const Feed = () => {
   const [postList, setPostList] = useState<any[]>([]);
@@ -20,10 +20,7 @@ const Feed = () => {
     getPosts();
   }, [postList]); 
 
-  useEffect(() => {
-    gsap.from(feedRef.current, { opacity: 0, y: 50 });
-    gsap.to(feedRef.current, { opacity: 1, y: 0, delay: 0.1 });
-  }, []);
+  useAnimation(feedRef);
 
   return (
     <>
