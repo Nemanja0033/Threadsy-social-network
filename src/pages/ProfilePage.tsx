@@ -1,7 +1,10 @@
+import Profile from '../components/profilePage/Profile'
 
 const ProfilePage = () => {
   return (
-    <div>Profile of </div>
+    <div>
+      <Profile />
+    </div>
   )
 }
 

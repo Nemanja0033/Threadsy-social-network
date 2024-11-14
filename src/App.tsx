@@ -19,7 +19,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/createpost" element={<CreatePost />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/profile:id" element={<ProfilePage />} />
+              <Route path="/profile/:authorID" element={<ProfilePage />} />
             </Routes>
           </Router>
         </CommentProvider>

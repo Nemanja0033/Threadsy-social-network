@@ -5,10 +5,12 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db, auth } from "../../firebaseconfig";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import fetchUserNamesFromPosts from "../../helpers/getUserNames";
 
 const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCardType) => {
   const [likesState, setLikesState] = useState<number>(likes.count); 
   const [userHasLiked, setUserHasLiked] = useState<boolean>(likes.users.includes(auth.currentUser?.uid));
+  const [userNames, setUserNames] = useState<string[]>([]);
   const { toggleLike } = useLikeContext();
   const currentUser = auth.currentUser?.uid;
 
@@ -39,9 +41,19 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
   useEffect(() => {
     setLikesState(likes.count);
     setUserHasLiked(likes.users.includes(currentUser));
+    const getUserNames = async () => {
+      const names = await fetchUserNamesFromPosts(likes.users);
+      setUserNames(names);
+    };
+    getUserNames();
   }, [likes.count, likes.users, currentUser]);
 
-  const openModal = () => { const modal = document.getElementById('my_modal_2') as HTMLDialogElement; if (modal) { modal.showModal(); } };
+  const openModal = () => {
+    const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
+    }
+  };
 
   return (
     <div className="flex justify-center">
@@ -61,16 +73,16 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
               onClick={handleLike}
             />
             
-          <button onClick={openModal}>{likesState}</button>
-          <dialog id="my_modal_2" className="modal">
-            <div className="modal-box">
-              <h3 className="font-bold text-lg">Likes</h3>
-              <p className="py-4">{likes.users.join(';')}</p>
-            </div>
-            <form method="dialog" className="modal-backdrop">
-              <button>close</button>
-            </form>
-          </dialog>
+            <button onClick={openModal}>{likesState}</button>
+            <dialog id="my_modal_2" className="modal">
+              <div className="modal-box">
+                <h3 className="font-bold text-lg">Likes</h3>
+                <p className="py-4">{userNames.join('; ')}</p>
+              </div>
+              <form method="dialog" className="modal-backdrop">
+                <button>close</button>
+              </form>
+            </dialog>
 
           </div>
           <MessageSquare className="cursor-pointer hover:text-red-500" />
