@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from '../../firebaseconfig';
 import PostCard from '../post/PostCard';
+import gsap from "gsap";
 
 const Profile = () => {
   const { authorID } = useParams<{ authorID: string }>();
   const [userPosts, setUserPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const porfileRef = useRef(null)
 
   useEffect(() => {
     const getUserPosts = async () => {
@@ -23,9 +25,14 @@ const Profile = () => {
       getUserPosts();
     }
   }, [authorID]);
+  
+  useEffect(() => {
+    gsap.from(porfileRef.current, { opacity: 0, y: 50 });
+    gsap.to(porfileRef.current, { opacity: 1, y: 0, delay: 0.1 });
+  }, []);
 
   return (
-    <div>
+    <div ref={porfileRef}>
       <h1 className="text-center text-2xl font-semibold mt-3">Author Profile</h1>
       <h1 className="text-center text-xl font-semibold text-gray-400">Posts</h1>
       {loading ? (
