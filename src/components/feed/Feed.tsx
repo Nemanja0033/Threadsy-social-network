@@ -31,9 +31,8 @@ const Feed = () => {
       <div ref={feedRef} className='flex justify-center'>
         <div className='flex-row md:w-1/2 w-full md:h-[86vh] h-screen md:overflow-auto md:mt-6 mt-0 overflow-auto bg-white rounded-md shadow-md'>
           {postList.length == 0 ? (
-            <div>
-              <h1 className='text-center text-3xl font-semibold mt-20'>There is nothing to show on feed</h1>
-              <h1 className='text-center text-xl font-bold mt-5'>:/</h1>
+            <div className='flex justify-center'>
+             <span className="loading loading-spinner loading-md"></span>
             </div>
           )
           :
