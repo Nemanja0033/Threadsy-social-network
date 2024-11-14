@@ -1,10 +1,10 @@
-import { CirclePlus, House, User } from "lucide-react";
+import { CirclePlus, House, LogOut, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 
 const Navbar = () => {
-  const { isAuth, userName, setIsAuth } = useAuth();
+  const { isAuth, setIsAuth } = useAuth();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
 
@@ -31,7 +31,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="w-full bg-white flex justify-between items-center h-[60px] shadow-md relative rounded-md">
+    <div className="w-full bg-white flex justify-between items-center h-[60px] sticky top-0 z-50 shadow-md  rounded-md">
       <div className="md:ml-32 ml-3 flex items-center cursor-pointer">
         <img onClick={handleClick} src="/logo/logo.png" className="md:w-1/4 w-1/5" alt="logo" />
         <h1 onClick={handleClick} className="text-gray-700 font-semibold cursor-pointer">DevTalks</h1>
@@ -67,9 +67,9 @@ const Navbar = () => {
       }
         
 
-        <div className="relative">
+        <div className="flex">
           <button onClick={handleToggleUserModal}>
-            {isAuth ? <span>{userName}</span> : <User className="hover:text-gray-400" />}
+            {isAuth ? <LogOut /> : <User className="hover:text-gray-400" />}
           </button>
 
           {showUserModal && (

@@ -34,14 +34,13 @@ const Profile = () => {
   return (
     <div ref={porfileRef}>
       <h1 className="text-center text-2xl font-semibold mt-3">Author Profile</h1>
-      <h1 className="text-center text-xl font-semibold text-gray-400">Posts</h1>
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <span className="loading loading-spinner loading-md"></span>
         </div>
       ) : (
        <div className="flex justify-center justify-self-center md:w-1/2 w-full">
-         <div className="flex-row md:w-full w-full md:h-[86vh] h-screen md:overflow-auto md:mt-6 mt-0 overflow-auto bg-white rounded-md shadow-md">
+         <div className="flex-row md:w-full w-full h-full md:mt-6 mt-0 bg-white rounded-md shadow-md">
           {userPosts.length === 0 ? (
             <div className="text-center text-xl font-bold mt-5">No posts to show</div>
           ) : (

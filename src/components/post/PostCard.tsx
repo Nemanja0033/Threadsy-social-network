@@ -99,9 +99,11 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
   return (
     <div className="flex justify-center">
       <div className="w-[600px] mt-6 ml-0 mr-0 flex-row rounded-xl border border-gray-100">
-        <div>
-          <Link to={`/profile/${authorID}`}><h1 className="text-md font-semibold text-start ml-3 mt-3">@{author}</h1></Link>
-          <h1 className="text-sm text-start text-gray-400 ml-3">{date}</h1>
+        <div className="flex justify-between">
+          <div className="flex-row">
+            <Link to={`/profile/${authorID}`}><h1 className="text-md font-semibold text-start ml-3 mt-3">@{author}</h1></Link>
+            <h1 className="text-sm text-start text-gray-400 ml-3">{date}</h1>
+          </div>
         </div>
         <h1 className="text-2xl ml-3 font-semibold text-center mb-3">{title}</h1>
         <div className="md:overflow-auto overflow-hidden max-h-44 min-h-12 w-full ml-1 mr-1 rounded text-center shadow-sm">
