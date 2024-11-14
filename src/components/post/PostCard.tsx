@@ -4,8 +4,9 @@ import { useLikeContext } from "../../actions/LikeContext";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db, auth } from "../../firebaseconfig";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const PostCard = ({ title, postData, author, date, id, likes }: PostCardType) => {
+const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCardType) => {
   const [likesState, setLikesState] = useState<number>(likes.count); 
   const [userHasLiked, setUserHasLiked] = useState<boolean>(likes.users.includes(auth.currentUser?.uid));
   const { toggleLike } = useLikeContext();
@@ -46,7 +47,7 @@ const PostCard = ({ title, postData, author, date, id, likes }: PostCardType) =>
     <div className="flex justify-center">
       <div className="w-[600px] mt-6 ml-0 mr-0 flex-row rounded-xl border border-gray-100">
         <div>
-          <h1 className="text-md font-semibold text-start ml-3 mt-3">@{author}</h1>
+          <Link to={`/profile/${authorID}`}><h1 className="text-md font-semibold text-start ml-3 mt-3">@{author}</h1></Link>
           <h1 className="text-sm text-start text-gray-400 ml-3">{date}</h1>
         </div>
         <h1 className="text-2xl ml-3 font-semibold text-center mb-3">{title}</h1>

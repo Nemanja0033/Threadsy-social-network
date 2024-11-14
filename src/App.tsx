@@ -6,6 +6,7 @@ import Navbar from "./components/nav/Navbar";
 import { AuthProvider } from "./context/authContext";
 import { LikeProvider } from "./actions/LikeContext";
 import { CommentProvider } from "./actions/CommentContext";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/createpost" element={<CreatePost />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/profile:id" element={<ProfilePage />} />
             </Routes>
           </Router>
         </CommentProvider>

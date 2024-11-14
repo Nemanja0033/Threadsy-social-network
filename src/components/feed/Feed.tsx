@@ -46,6 +46,7 @@ const Feed = () => {
                 author={post.author.name}
                 date={post.date.toString()}
                 likes={post.likes}
+                authorID={post.author.id}
               />
             ))
           )
