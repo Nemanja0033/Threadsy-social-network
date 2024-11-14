@@ -1,16 +1,18 @@
-import { Heart, MessageSquare } from "lucide-react";
+import { Heart, MessageSquare, SendHorizontal } from "lucide-react";
 import { PostCardType } from "../../types/PostCardType";
 import { useLikeContext } from "../../actions/LikeContext";
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import { db, auth } from "../../firebaseconfig";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import fetchUserNamesFromPosts from "../../helpers/getUserNames";
 
 const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCardType) => {
-  const [likesState, setLikesState] = useState<number>(likes.count); 
+  const [likesState, setLikesState] = useState<number>(likes.count);
   const [userHasLiked, setUserHasLiked] = useState<boolean>(likes.users.includes(auth.currentUser?.uid));
   const [userNames, setUserNames] = useState<string[]>([]);
+  const [comments, setComments] = useState<{ text: string; user: string; date: any }[]>([]);
+  const [newComment, setNewComment] = useState<string>("");
   const { toggleLike } = useLikeContext();
   const currentUser = auth.currentUser?.uid;
 
@@ -34,8 +36,26 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
       setUserHasLiked(true);
     }
 
-    setLikesState(newLikesCount); 
-    toggleLike(id); 
+    setLikesState(newLikesCount);
+    toggleLike(id);
+  };
+
+  const handleCommentSubmit = async () => {
+    const postRef = doc(db, "posts", id);
+    const comment = {
+      text: newComment,
+      user: auth.currentUser?.displayName || "Anonymous",
+      date:  new Date().toLocaleString('en-US', {
+        weekday: 'long',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    };
+    await updateDoc(postRef, {
+      comments: arrayUnion(comment),
+    });
+    setComments([...comments, comment]);
+    setNewComment("");
   };
 
   useEffect(() => {
@@ -49,15 +69,28 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
     };
 
     getUserNames();
-  }, [likes.users]); 
+  }, [likes.users]);
 
   useEffect(() => {
     setLikesState(likes.count);
     setUserHasLiked(likes.users.includes(currentUser));
   }, [likes.count, likes.users, currentUser]);
 
-  const openModal = () => {
-    const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
+  useEffect(() => {
+    const fetchComments = async () => {
+      const postRef = doc(db, "posts", id);
+      const postSnap = await getDoc(postRef);
+      if (postSnap.exists()) {
+        const postData = postSnap.data();
+        setComments(postData?.comments || []);
+      }
+    };
+
+    fetchComments();
+  }, [id]);
+
+  const openModal = (modalId: string) => {
+    const modal = document.getElementById(modalId) as HTMLDialogElement;
     if (modal) {
       modal.showModal();
     }
@@ -81,8 +114,8 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
               onClick={handleLike}
             />
             
-            <button onClick={openModal}>{likesState}</button>
-            <dialog id="my_modal_2" className="modal">
+            <button onClick={() => openModal(`like_modal_${id}`)}>{likesState}</button>
+            <dialog id={`like_modal_${id}`} className="modal">
               <div className="modal-box">
                 <h3 className="font-bold text-lg">Likes</h3>
                 <p className="py-4">{userNames.join('; ')}</p>
@@ -91,9 +124,42 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
                 <button>close</button>
               </form>
             </dialog>
-
           </div>
-          <MessageSquare className="cursor-pointer hover:text-red-500" />
+
+          <button className="flex gap-2" onClick={() => openModal(`comment_modal_${id}`)}><MessageSquare className="cursor-pointer hover:text-red-500" />{comments.length}</button>
+          <dialog id={`comment_modal_${id}`} className="modal">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg">Comments</h3>
+              <div className="mt-3 mb-3 overflow-auto min-h-12 max-h-32">
+              {comments.length > 0 ? (
+                  comments.map((comment, index) => (
+                    <div key={index} className="mb-2">
+                      <strong>{comment.user}:</strong> {comment.text}
+                      <br />
+                      <span className="text-sm text-gray-400">{comment.date}</span>
+                    </div>
+                  ))
+                ) : (
+                  <div>
+                    <h1 className="text-center">No comments yet!</h1>
+                  </div>
+                )}
+              </div>
+              <div className="flex gap-2 justify-center items-center">
+                <input
+                  type="text"
+                  placeholder="Add a comment"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                  className="input input-bordered w-full mb-4"
+                />
+                <button onClick={handleCommentSubmit}><SendHorizontal /></button>
+              </div>
+              <form method="dialog" className="modal-backdrop">
+                <button className="text-gray-700">Close</button>
+              </form>
+            </div>
+          </dialog>
         </div>
       </div>
     </div>
