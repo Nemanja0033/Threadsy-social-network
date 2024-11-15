@@ -67,10 +67,9 @@ const Sidebar = () => {
                       <h1>No Posts To Show</h1>
                     )}
                   </div>
-                  <hr />
                   <div className="flex justify-center">
                     <Link to={`/profile/${auth.currentUser?.uid}`}>
-                      <button className="btn btn-sm btn-neutral mt-3">My Profile</button>
+                      <button className="btn btn-sm btn-accent mt-3 text-white">My Profile</button>
                     </Link>
                   </div>
                 </div>

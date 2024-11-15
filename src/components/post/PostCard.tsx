@@ -98,10 +98,10 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
 
   return (
     <div className="flex justify-center">
-      <div className="w-[600px] mt-6 ml-0 mr-0 flex-row rounded-xl border border-gray-100">
+      <div className="w-[600px] mt-6 ml-0 mr-0 flex-row rounded-xl">
         <div className="flex justify-between">
           <div className="flex-row">
-            <Link to={`/profile/${authorID}`}><h1 className="text-md font-semibold text-start ml-3 mt-3">@{author}</h1></Link>
+            <Link to={`/profile/${authorID}`}><h1 className="text-md text-gray-500 font-semibold text-start ml-3 mt-3">@{author}</h1></Link>
             <h1 className="text-sm text-start text-gray-400 ml-3">{date}</h1>
           </div>
         </div>
@@ -109,10 +109,10 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
         <div className="md:overflow-auto overflow-hidden max-h-44 min-h-12 w-full ml-1 mr-1 rounded text-center shadow-sm">
           {postData}
         </div>
-        <div className="w-full h-7 bg-white rounded flex justify-center gap-8 shadow-sm items-center">
+        <div className="w-full h-7 rounded flex justify-center gap-8 shadow-sm items-center">
           <div className="flex items-center gap-1">
             <Heart
-              className={`cursor-pointer hover:text-red-500 ${userHasLiked ? 'text-red-500' : ''}`}
+              className={`cursor-pointer hover:text-primary ${userHasLiked ? 'text-red-500' : ''}`}
               onClick={handleLike}
             />
             
@@ -128,7 +128,7 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
             </dialog>
           </div>
 
-          <button className="flex gap-2" onClick={() => openModal(`comment_modal_${id}`)}><MessageSquare className="cursor-pointer hover:text-red-500" />{comments.length}</button>
+          <button className="flex gap-2" onClick={() => openModal(`comment_modal_${id}`)}><MessageSquare className="cursor-pointer hover:text-primary" />{comments.length}</button>
           <dialog id={`comment_modal_${id}`} className="modal">
             <div className="modal-box">
               <h3 className="font-bold text-lg">Comments</h3>
@@ -153,9 +153,9 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
                   placeholder="Add a comment"
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
-                  className="input input-bordered w-full mb-4"
+                  className="input input-bordered w-full mb-4 h-10" 
                 />
-                <button onClick={handleCommentSubmit}><SendHorizontal /></button>
+                <button onClick={handleCommentSubmit}><SendHorizontal className="hover:text-primary" /></button>
               </div>
               <form method="dialog" className="modal-backdrop">
                 <button className="text-gray-700">Close</button>

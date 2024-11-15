@@ -30,12 +30,12 @@ const Feed = () => {
     <div className='md:flex flex-row justify-center'>
       <Sidebar />
       <div ref={feedRef} className={`flex justify-center ${isAuth ? 'mr-64' : 'mr-0'} md:w-1/2 w-full`}>
-        <div className='flex-row w-full h-full md:mt-6 mt-0  bg-white rounded-md md:shadow-md '>
+        <div className='flex-row w-full h-screen md:mt-6 mt-0 overflow-auto rounded-md md:shadow-md '>
           {!isAuth ? (
             <div className='flex gap-3 justify-center md:mt-3 mt-12'>
               <h1 className='text-center font-semibold text-2xl'>Login to explore more features</h1>
               <Link to={'/login'}>
-                <button className="btn btn-sm btn-neutral">Login</button>
+                <button className="btn btn-sm btn-accent text-white">Login</button>
               </Link>
 
             </div>
