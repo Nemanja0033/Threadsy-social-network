@@ -24,7 +24,7 @@ const Feed = () => {
 
   return (
     <div className='flex justify-center'>
-      <div ref={feedRef} className='flex justify-center w-1/2'>
+      <div ref={feedRef} className='flex justify-center md:w-1/2 w-full'>
         <div className='flex-row w-full h-full md:mt-6 mt-0  bg-white rounded-md shadow-md'>
           {postList.length == 0 ? (
             <div className='flex justify-center'>
