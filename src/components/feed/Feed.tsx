@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { db } from '../../firebaseconfig';
 import PostCard from '../post/PostCard';
 import { useAnimation } from '../../helpers/useAnimation';
+import Sidebar from '../nav/Sidebar';
 
 const Feed = () => {
   const [postList, setPostList] = useState<any[]>([]);
@@ -24,6 +25,7 @@ const Feed = () => {
 
   return (
     <div className='flex justify-center'>
+      <Sidebar />
       <div ref={feedRef} className='flex justify-center md:w-1/2 w-full'>
         <div className='flex-row w-full h-full md:mt-6 mt-0  bg-white rounded-md shadow-md'>
           {postList.length == 0 ? (
