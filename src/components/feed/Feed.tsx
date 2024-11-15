@@ -5,7 +5,6 @@ import PostCard from '../post/PostCard';
 import { useAnimation } from '../../helpers/useAnimation';
 import Sidebar from '../nav/Sidebar';
 import { useAuth } from '../../context/authContext';
-import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Feed = () => {
@@ -28,15 +27,15 @@ const Feed = () => {
   useAnimation(feedRef);
 
   return (
-    <div className='flex justify-start'>
+    <div className='md:flex flex-row justify-center'>
       <Sidebar />
-      <div ref={feedRef} className='flex justify-center md:w-1/2 w-full'>
-        <div className='flex-row w-full h-full md:mt-6 mt-0  bg-white rounded-md shadow-md'>
+      <div ref={feedRef} className='flex justify-center mr-64 md:w-1/2 w-full'>
+        <div className='flex-row w-full h-full md:mt-6 mt-0  bg-white rounded-md md:shadow-md '>
           {!isAuth ? (
             <div className='flex gap-3 justify-center md:mt-3 mt-12'>
               <h1 className='text-center font-semibold text-2xl'>Login to explore more features</h1>
               <Link to={'/login'}>
-                <button className="btn btn-sm btn-neutral">Login <ArrowRight /></button>
+                <button className="btn btn-sm btn-neutral">Login</button>
               </Link>
 
             </div>

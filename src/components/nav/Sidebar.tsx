@@ -47,9 +47,9 @@ const Sidebar = () => {
         <div>
           {isAuth ? (
             loading ? (
-              <span className="loading loading-spinner loading-md mt-32"></span>
+              <span className="loading loading-spinner loading-md"></span>
             ) : (
-              <div ref={sidebarRef} className="w-60 mt-20 mr-32 ml-12 h-72 rounded-xl shadow-md flex justify-center">
+              <div ref={sidebarRef} className="md:w-60 w-full md:mt-20 md:mr-20 md:ml-12 md:mb-0 mb-6 mt-6 h-72 rounded-xl shadow-md flex justify-center">
                 <div className="w-full">
                   <h1 className="text-center text-sm text-gray-400">User Summary</h1>
                   <h1 className="text-gray-500 text-center text-xl mb-6 mt-1">
