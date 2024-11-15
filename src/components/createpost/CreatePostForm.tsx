@@ -10,7 +10,7 @@ const CreatePostForm = () => {
 
   const [title, setTitle] = useState<string>("");
   const [postData, setPostData] = useState<string>("");
-  const newPostRef = useRef(null);
+  const newPostRef = useRef<HTMLDivElement | null>(null);
   const { isAuth } = useAuth();
 
   const postsCollectionRef = collection(db, "posts");

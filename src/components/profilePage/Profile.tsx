@@ -9,7 +9,7 @@ const Profile = () => {
   const { authorID } = useParams<{ authorID: string }>();
   const [userPosts, setUserPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const porfileRef = useRef(null)
+  const porfileRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const getUserPosts = async () => {

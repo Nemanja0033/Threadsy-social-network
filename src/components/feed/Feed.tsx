@@ -4,10 +4,14 @@ import { db } from '../../firebaseconfig';
 import PostCard from '../post/PostCard';
 import { useAnimation } from '../../helpers/useAnimation';
 import Sidebar from '../nav/Sidebar';
+import { useAuth } from '../../context/authContext';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Feed = () => {
+  const { isAuth } = useAuth()
   const [postList, setPostList] = useState<any[]>([]);
-  const feedRef = useRef(null);
+  const feedRef = useRef<HTMLDivElement | null>(null);
 
   const postsCollectionRef = collection(db, "posts");
 
@@ -28,6 +32,20 @@ const Feed = () => {
       <Sidebar />
       <div ref={feedRef} className='flex justify-center md:w-1/2 w-full'>
         <div className='flex-row w-full h-full md:mt-6 mt-0  bg-white rounded-md shadow-md'>
+          {!isAuth ? (
+            <div className='flex gap-3 justify-center md:mt-3 mt-12'>
+              <h1 className='text-center font-semibold text-2xl'>Login to explore more features</h1>
+              <Link to={'/login'}>
+                <button className="btn btn-sm btn-neutral">Login <ArrowRight /></button>
+              </Link>
+
+            </div>
+          )
+          :
+          (
+            <h1 className='text-center font-semibold text-2xl'>Home</h1>
+          )
+        }
           {postList.length == 0 ? (
             <div className='flex justify-center'>
              <span className="loading loading-spinner loading-md"></span>
