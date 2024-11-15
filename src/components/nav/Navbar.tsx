@@ -72,7 +72,7 @@ const Navbar = () => {
             {isAuth ? <LogOut className="hover:text-primary" /> : <User className="hover:text-primary" />}
           </button>
 
-          <div className="ml-6">
+          <div className="md:ml-6 ml-3">
             <ThemeToggler />
           </div>
 

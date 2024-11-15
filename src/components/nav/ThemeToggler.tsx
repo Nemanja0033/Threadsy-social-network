@@ -22,7 +22,7 @@ const ThemeToggler = () => {
 
   return (
     <div>
-       {theme == 'light' ? <SunIcon className="hover:text-primary cursor-pointer" onClick={toggleChange} /> : <MoonIcon className="hover:text-primary cursor-pointer" onClick={toggleChange} />}
+       {theme == 'light' ? <MoonIcon className="hover:text-primary cursor-pointer" onClick={toggleChange} /> : <SunIcon className="hover:text-primary cursor-pointer" onClick={toggleChange} />}
     </div>
   )
 }
