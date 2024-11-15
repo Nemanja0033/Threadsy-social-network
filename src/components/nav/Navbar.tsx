@@ -2,6 +2,7 @@ import { CirclePlus, House, LogOut, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
+import ThemeToggler from "./ThemeToggler";
 
 const Navbar = () => {
   const { isAuth, setIsAuth } = useAuth();
@@ -65,12 +66,15 @@ const Navbar = () => {
         )
       
       }
-        
 
         <div className="flex">
           <button onClick={handleToggleUserModal}>
             {isAuth ? <LogOut className="hover:text-primary" /> : <User className="hover:text-primary" />}
           </button>
+
+          <div className="ml-6">
+            <ThemeToggler />
+          </div>
 
           {showUserModal && (
             <div className="absolute top-[40px] left-1/2 transform -translate-x-1/2 bg-white border shadow-lg p-2 rounded-md md:w-20 w-12 z-10">
