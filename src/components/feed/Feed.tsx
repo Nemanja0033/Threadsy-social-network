@@ -29,7 +29,7 @@ const Feed = () => {
   return (
     <div className='md:flex flex-row justify-center'>
       <Sidebar />
-      <div ref={feedRef} className='flex justify-center mr-64 md:w-1/2 w-full'>
+      <div ref={feedRef} className={`flex justify-center ${isAuth ? 'mr-64' : 'mr-0'} md:w-1/2 w-full`}>
         <div className='flex-row w-full h-full md:mt-6 mt-0  bg-white rounded-md md:shadow-md '>
           {!isAuth ? (
             <div className='flex gap-3 justify-center md:mt-3 mt-12'>
