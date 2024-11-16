@@ -10,7 +10,6 @@ const Profile = () => {
   const { authorID } = useParams<{ authorID: string }>();
   const [userPosts, setUserPosts] = useState<any[]>([]);
   const [username, setUserName] = useState<any[]>([]);
-  const [userPhoto, setUserPhoto] = useState<any[]>([]);
   const { isAuth } = useAuth() ;
   const [loading, setLoading] = useState<boolean>(true);
   const porfileRef = useRef<HTMLDivElement | null>(null)
