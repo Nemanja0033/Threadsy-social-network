@@ -4,23 +4,30 @@ import { signInWithPopup } from "firebase/auth";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import { useAnimation } from "../../helpers/useAnimation";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 
 const LoginForm = () => {
     let navigate = useNavigate();
     const { setIsAuth, setUserName } = useAuth();
   
     const signInWithGoogle = async () => {
-      const userCollectionRef = collection(db, "users");
-      await addDoc(userCollectionRef, {
-        username: auth.currentUser?.displayName,
-        userId: auth.currentUser?.uid,
-      })
-      signInWithPopup(auth, provider).then((result) => {
+      signInWithPopup(auth, provider).then(async (result) => {
         setIsAuth(true);
         setUserName(result.user.displayName || "");
         localStorage.setItem("isAuth", "true");
         localStorage.setItem("userName", result.user.displayName || "");
+        const userCollectionRef = collection(db, "users");
+        
+        const userQuery = query(userCollectionRef, where("userId", "==", auth.currentUser?.uid));
+        const querySnapshot = await getDocs(userQuery);
+
+        if(querySnapshot.empty) {
+          await addDoc(userCollectionRef, {
+            username: auth.currentUser?.displayName,
+            userId: auth.currentUser?.uid,
+            userPhoto: auth.currentUser?.photoURL,
+          })
+        }
         navigate('/')
       });
     };

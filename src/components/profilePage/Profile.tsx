@@ -9,7 +9,7 @@ import { useAuth } from "../../context/authContext";
 const Profile = () => {
   const { authorID } = useParams<{ authorID: string }>();
   const [userPosts, setUserPosts] = useState<any[]>([]);
-  const [username, setUserName] = useState<any[]>([]);
+  const [userData, setUserData] = useState<any[]>([]);
   const { isAuth } = useAuth() ;
   const [loading, setLoading] = useState<boolean>(true);
   const porfileRef = useRef<HTMLDivElement | null>(null)
@@ -34,12 +34,13 @@ const Profile = () => {
       const userDataCollectionRef = collection(db, "users");
       const q = query(userDataCollectionRef, where("userId", "==", authorID))
       const data = await getDocs(q);
-      setUserName(data.docs.map(doc =>({ ...doc.data(), id: doc.id})))
+      setUserData(data.docs.map(doc =>({ ...doc.data(), id: doc.id})))
+      console.log(data.docs.map(doc =>({ ...doc.data(), id: doc.id})))
 
     }
 
     getUserData()
-  }, [])
+  }, [authorID])
   
   useEffect(() => {
     gsap.from(porfileRef.current, { opacity: 0, y: 50 });
@@ -47,15 +48,19 @@ const Profile = () => {
   }, []);
 
   return (
-    <div ref={porfileRef}>
+    <div className="felx justify-center items-center mt-12" ref={porfileRef}>
       {authorID === auth.currentUser?.uid && isAuth ? (
-        <h1 className="text-center text-2xl mt-6 font-semibold">My Profile</h1>
+        <div className="shadow-md">
+          {userData.map((user) => (
+            <div className="flex justify-center items-center gap-2"><img className="scale-75 rounded-full" src={user.userPhoto} /><span className="text-2xl font-semibold">{user.username}</span></div>
+          ))}
+        </div>
       )
       :
       (
-        <h1 className="text-center text-2xl mt-6 font-semibold">{username.map((user) => (
-          <h1 key={user.userId}>{user.username}</h1>
-        ))} Profile</h1>
+        <div className="flex justify-center items-center mt-3">{userData.map((user) => (
+          <div className="flex justify-center items-center gap-2"><img className="scale-75 rounded-full" src={user.userPhoto} /><span className="text-2xl font-semibold">{user.username}</span></div>
+        ))}</div>
       )
     }
       {loading ? (
@@ -63,7 +68,7 @@ const Profile = () => {
           <span className="loading loading-spinner loading-md"></span>
         </div>
       ) : (
-       <div className="flex justify-center justify-self-center md:w-1/2 w-full">
+       <div className="flex justify-center justify-self-center md:w-1/2 w-full mt-20">
          <div className="flex-row md:w-full w-full h-full md:mt-6 mt-0  rounded-md shadow-md">
           {userPosts.length === 0 ? (
             <div className="text-center text-xl font-bold mt-5">No posts to show</div>
