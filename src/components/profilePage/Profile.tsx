@@ -58,7 +58,7 @@ const Profile = () => {
       )
       :
       (
-        <div className="flex justify-center items-center mt-3">{userData.map((user) => (
+        <div className="flex justify-center items-center mt-3 shadow-md">{userData.map((user) => (
           <div className="flex justify-center items-center gap-2"><img className="scale-75 rounded-full" src={user.userPhoto} /><span className="text-2xl font-semibold">{user.username}</span></div>
         ))}</div>
       )

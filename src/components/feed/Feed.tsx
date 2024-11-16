@@ -2,7 +2,7 @@ import { collection, getDocs, query, orderBy} from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { db } from '../../firebaseconfig';
 import PostCard from '../post/PostCard';
-import { useAnimation } from '../../helpers/useAnimation';
+import { useAnimation } from '../../hooks/useAnimation';
 import Sidebar from '../nav/Sidebar';
 import { useAuth } from '../../context/authContext';
 import { Link } from 'react-router-dom';

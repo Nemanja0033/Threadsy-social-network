@@ -2,7 +2,7 @@ import { query, where, getDocs, collection } from "firebase/firestore";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../context/authContext";
 import { auth, db } from "../../firebaseconfig";
-import { useAnimation } from "../../helpers/useAnimation";
+import { useAnimation } from "../../hooks/useAnimation";
 import { Link } from "react-router-dom";
 import { onAuthStateChanged  } from "firebase/auth";
 

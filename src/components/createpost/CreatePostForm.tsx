@@ -3,7 +3,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../../firebaseconfig";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
-import { useAnimation } from "../../helpers/useAnimation";
+import { useAnimation } from "../../hooks/useAnimation";
 
 const CreatePostForm = () => {
   let navigate = useNavigate();

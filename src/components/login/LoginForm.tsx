@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
-import { auth, db, provider } from "../../firebaseconfig";
+import { auth, provider } from "../../firebaseconfig";
 import { signInWithPopup } from "firebase/auth";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
-import { useAnimation } from "../../helpers/useAnimation";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { useAnimation } from "../../hooks/useAnimation";
+import { setUsersInFirestore } from "../../helpers/setUserData";
 
 const LoginForm = () => {
     let navigate = useNavigate();
@@ -16,18 +16,7 @@ const LoginForm = () => {
         setUserName(result.user.displayName || "");
         localStorage.setItem("isAuth", "true");
         localStorage.setItem("userName", result.user.displayName || "");
-        const userCollectionRef = collection(db, "users");
-        
-        const userQuery = query(userCollectionRef, where("userId", "==", auth.currentUser?.uid));
-        const querySnapshot = await getDocs(userQuery);
-
-        if(querySnapshot.empty) {
-          await addDoc(userCollectionRef, {
-            username: auth.currentUser?.displayName,
-            userId: auth.currentUser?.uid,
-            userPhoto: auth.currentUser?.photoURL,
-          })
-        }
+        setUsersInFirestore();
         navigate('/')
       });
     };
