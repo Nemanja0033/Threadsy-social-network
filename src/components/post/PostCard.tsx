@@ -1,13 +1,15 @@
-import { Heart, MessageSquare, SendHorizontal } from "lucide-react";
+import { Heart, MessageSquare, SendHorizontal, Trash } from "lucide-react";
 import { PostCardType } from "../../types/PostCardType";
 import { useLikeContext } from "../../actions/LikeContext";
-import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, getDoc, deleteDoc } from "firebase/firestore";
 import { db, auth } from "../../firebaseconfig";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import fetchUserNamesFromPosts from "../../helpers/getUserNames";
+import { useAuth } from "../../context/authContext";
 
 const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCardType) => {
+  const { isAuth } = useAuth();
   const [likesState, setLikesState] = useState<number>(likes.count);
   const [userHasLiked, setUserHasLiked] = useState<boolean>(likes.users.includes(auth.currentUser?.uid));
   const [userNames, setUserNames] = useState<string[]>([]);
@@ -58,6 +60,11 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
     setNewComment("");
   };
 
+  const deletePost = async (id: string) => {
+    const post = doc(db, 'posts', id);
+    await deleteDoc(post);
+  }
+
   useEffect(() => {
     const getUserNames = async () => {
       if (likes.users.length > 0) {
@@ -104,6 +111,10 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
             <Link to={`/profile/${authorID}`}><h1 className="text-md text-gray-500 font-semibold text-start ml-3 mt-3">@{author}</h1></Link>
             <h1 className="text-sm text-start text-gray-400 ml-3">{date}</h1>
           </div>
+          <div className="mr-3">
+          {isAuth && authorID === auth.currentUser?.uid && 
+          <Trash onClick={() => deletePost(id)} size={20} className="hover:text-primary cursor-pointer" />}
+          </div>
         </div>
         <h1 className="text-2xl ml-3 font-semibold text-center mb-3">{title}</h1>
         <div className="md:overflow-auto overflow-hidden max-h-44 min-h-12 w-full ml-1 mr-1 rounded text-center shadow-sm">
@@ -111,7 +122,7 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
         </div>
         <div className="w-full h-7 rounded flex justify-center gap-8 shadow-sm items-center">
           <div className="flex items-center gap-1">
-            <Heart
+            <Heart size={20}
               className={`cursor-pointer hover:text-primary ${userHasLiked ? 'text-red-500' : ''}`}
               onClick={handleLike}
             />
@@ -128,7 +139,7 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
             </dialog>
           </div>
 
-          <button className="flex gap-2" onClick={() => openModal(`comment_modal_${id}`)}><MessageSquare className="cursor-pointer hover:text-primary" />{comments.length}</button>
+          <button className="flex gap-2" onClick={() => openModal(`comment_modal_${id}`)}><MessageSquare size={20} className="cursor-pointer hover:text-primary" />{comments.length}</button>
           <dialog id={`comment_modal_${id}`} className="modal">
             <div className="modal-box">
               <h3 className="font-bold text-lg">Comments</h3>
@@ -136,9 +147,9 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
               {comments.length > 0 ? (
                   comments.map((comment, index) => (
                     <div key={index} className="mb-2">
-                      <strong>{comment.user}:</strong> {comment.text}
+                      <strong>{comment.user}</strong> <span className="text-sm text-gray-400">{comment.date}</span>
                       <br />
-                      <span className="text-sm text-gray-400">{comment.date}</span>
+                      {comment.text}
                     </div>
                   ))
                 ) : (

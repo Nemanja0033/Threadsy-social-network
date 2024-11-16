@@ -64,7 +64,7 @@ const Sidebar = () => {
                         </h1>
                       ))
                     ) : (
-                      <h1>No Posts To Show</h1>
+                      <h1 className="text-center">No Posts To Show</h1>
                     )}
                   </div>
                   <div className="flex justify-center">
