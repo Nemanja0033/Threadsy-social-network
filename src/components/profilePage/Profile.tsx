@@ -9,6 +9,8 @@ import { useAuth } from "../../context/authContext";
 const Profile = () => {
   const { authorID } = useParams<{ authorID: string }>();
   const [userPosts, setUserPosts] = useState<any[]>([]);
+  const [username, setUserName] = useState<any[]>([]);
+  const [userPhoto, setUserPhoto] = useState<any[]>([]);
   const { isAuth } = useAuth() ;
   const [loading, setLoading] = useState<boolean>(true);
   const porfileRef = useRef<HTMLDivElement | null>(null)
@@ -27,6 +29,18 @@ const Profile = () => {
       getUserPosts();
     }
   }, [authorID]);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const userDataCollectionRef = collection(db, "users");
+      const q = query(userDataCollectionRef, where("userId", "==", authorID))
+      const data = await getDocs(q);
+      setUserName(data.docs.map(doc =>({ ...doc.data(), id: doc.id})))
+
+    }
+
+    getUserData()
+  }, [])
   
   useEffect(() => {
     gsap.from(porfileRef.current, { opacity: 0, y: 50 });
@@ -40,7 +54,9 @@ const Profile = () => {
       )
       :
       (
-        <h1 className="text-center text-2xl mt-6 font-semibold">Author Profile</h1>
+        <h1 className="text-center text-2xl mt-6 font-semibold">{username.map((user) => (
+          <h1 key={user.userId}>{user.username}</h1>
+        ))} Profile</h1>
       )
     }
       {loading ? (

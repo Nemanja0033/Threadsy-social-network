@@ -1,15 +1,21 @@
 import { useEffect, useRef } from "react";
-import { auth, provider } from "../../firebaseconfig";
+import { auth, db, provider } from "../../firebaseconfig";
 import { signInWithPopup } from "firebase/auth";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import { useAnimation } from "../../helpers/useAnimation";
+import { addDoc, collection } from "firebase/firestore";
 
 const LoginForm = () => {
     let navigate = useNavigate();
     const { setIsAuth, setUserName } = useAuth();
   
-    const signInWithGoogle = () => {
+    const signInWithGoogle = async () => {
+      const userCollectionRef = collection(db, "users");
+      await addDoc(userCollectionRef, {
+        username: auth.currentUser?.displayName,
+        userId: auth.currentUser?.uid,
+      })
       signInWithPopup(auth, provider).then((result) => {
         setIsAuth(true);
         setUserName(result.user.displayName || "");
