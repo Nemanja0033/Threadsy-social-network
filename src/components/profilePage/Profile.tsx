@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useEffect, useRef, useState } from "react";
-import { db } from '../../firebaseconfig';
+import { auth, db } from '../../firebaseconfig';
 import PostCard from '../post/PostCard';
 import gsap from "gsap";
+import { useAuth } from "../../context/authContext";
 
 const Profile = () => {
   const { authorID } = useParams<{ authorID: string }>();
   const [userPosts, setUserPosts] = useState<any[]>([]);
+  const { isAuth } = useAuth() ;
   const [loading, setLoading] = useState<boolean>(true);
   const porfileRef = useRef<HTMLDivElement | null>(null)
 
@@ -33,7 +35,14 @@ const Profile = () => {
 
   return (
     <div ref={porfileRef}>
-      <h1 className="text-center text-2xl font-semibold mt-3">Author Profile</h1>
+      {authorID === auth.currentUser?.uid && isAuth ? (
+        <h1 className="text-center text-2xl mt-6 font-semibold">My Profile</h1>
+      )
+      :
+      (
+        <h1 className="text-center text-2xl mt-6 font-semibold">Author Profile</h1>
+      )
+    }
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <span className="loading loading-spinner loading-md"></span>
