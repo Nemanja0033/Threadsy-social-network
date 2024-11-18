@@ -73,9 +73,16 @@ const Navbar = () => {
             {isAuth ? <LogOut className="hover:text-primary" /> : <User className="hover:text-primary" />}
           </button>
 
-          <div className="md:ml-6 ml-3 md:hidden flex">
+          {isAuth ? (
+            <div className="md:ml-6 ml-3 md:hidden flex">
             <Link to={`/profile/${auth.currentUser?.uid}`}><UserIcon /></Link>
           </div>
+          )
+          :
+          (
+            ''
+          )
+        }
 
           <div className="md:ml-6 ml-3">
             <ThemeToggler />
