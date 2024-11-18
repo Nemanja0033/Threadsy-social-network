@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import fetchUserNamesFromPosts from "../../helpers/getUserNames";
 import { useAuth } from "../../context/authContext";
+import UserImage from "../user/UserImage";
 
 const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCardType) => {
   const { isAuth } = useAuth();
@@ -96,6 +97,7 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
     fetchComments();
   }, [id]);
 
+
   const openModal = (modalId: string) => {
     const modal = document.getElementById(modalId) as HTMLDialogElement;
     if (modal) {
@@ -108,7 +110,7 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
       <div className="w-[600px] mt-6 ml-0 mr-0 flex-row rounded-xl">
         <div className="flex justify-between">
           <div className="flex-row">
-            <Link to={`/profile/${authorID}`}><h1 className="text-md text-gray-500 font-semibold text-start ml-3 mt-3">@{author}</h1></Link>
+            <Link to={`/profile/${authorID}`}><h1 className="flex justify-center items-center text-md text-gray-500 font-semibold text-start ml-3 mt-3"><UserImage  authorID={authorID} /> {author}</h1></Link>
             <h1 className="text-sm text-start text-gray-400 ml-3">{date}</h1>
           </div>
           <div className="mr-3">
