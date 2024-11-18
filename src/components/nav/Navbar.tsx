@@ -33,10 +33,9 @@ const Navbar = () => {
   }
 
   return (
-    <div className="w-full bg-base-100 flex justify-between items-center h-[60px] sticky top-0 z-50 shadow-md  rounded-md">
+    <div className="w-full bg-base-100 flex justify-evenly items-center h-[60px] sticky top-0 z-50 shadow-md  rounded-md">
       <div className="md:ml-32 ml-3 flex items-center cursor-pointer">
-        <img onClick={handleClick} src="/logo/logo.png" className="md:w-1/4 w-1/5" alt="logo" />
-        <h1 onClick={handleClick} className="font-semibold cursor-pointer">DevTalks</h1>
+        <img onClick={handleClick} src="/logo/logo.png" className="md:w-1/3 w-1/3" alt="logo" />
       </div>
       <div className="md:mr-32 mr-3 flex md:gap-8 gap-4 relative items-center">
         <Link to={'/'}><House className="hover:text-primary" /></Link>
