@@ -1,6 +1,6 @@
 import { Heart, MessageSquare, SendHorizontal, Trash } from "lucide-react";
 import { PostCardType } from "../../types/PostCardType";
-import { useLikeContext } from "../../actions/LikeContext";
+import { useLikeContext } from "../../context/LikeContext";
 import { doc, updateDoc, arrayUnion, arrayRemove, getDoc, deleteDoc } from "firebase/firestore";
 import { db, auth } from "../../firebaseconfig";
 import { useEffect, useState } from "react";

@@ -26,6 +26,12 @@ const Feed = () => {
   }, [postList]); 
 
   useAnimation(feedRef);
+
+  if(postList.length == 0){
+    return <div className='flex justify-center items-center mt-12'>
+              <span className="loading loading-spinner loading-lg"></span>
+          </div>
+  }
   
 
   return (
@@ -50,27 +56,20 @@ const Feed = () => {
             </>
           )
         }
-          {postList.length == 0 ? (
-            <div className='flex justify-center'>
-             <span className="loading loading-spinner loading-md"></span>
-            </div>
-          )
-          :
-          (
-            postList.map((post) => (
-              <PostCard
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                postData={post.postData}
-                author={post.author.name}
-                date={post.date.toString()}
-                likes={post.likes}
-                authorID={post.author.id}
-              />
-            ))
-          )
-        }
+         {
+           postList.map((post) => (
+            <PostCard
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              postData={post.postData}
+              author={post.author.name}
+              date={post.date.toString()}
+              likes={post.likes}
+              authorID={post.author.id}
+            />
+          ))
+         }
         </div>
       </div>
     </div>

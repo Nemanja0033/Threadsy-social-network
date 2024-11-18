@@ -4,8 +4,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./components/nav/Navbar";
 import { AuthProvider } from "./context/authContext";
-import { LikeProvider } from "./actions/LikeContext";
-import { CommentProvider } from "./actions/CommentContext";
+import { LikeProvider } from "./context/LikeContext";
+import { CommentProvider } from "./context/CommentContext";
 import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
