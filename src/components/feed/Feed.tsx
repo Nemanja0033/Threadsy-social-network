@@ -6,6 +6,7 @@ import { useAnimation } from '../../hooks/useAnimation';
 import Sidebar from '../nav/Sidebar';
 import { useAuth } from '../../context/authContext';
 import { Link } from 'react-router-dom';
+import CreatePostFeed from '../createpost/CreatePostFeed';
 
 const Feed = () => {
   const { isAuth } = useAuth()
@@ -42,7 +43,10 @@ const Feed = () => {
           )
           :
           (
-            <h1 className='text-center font-semibold text-2xl'>Home</h1>
+            <>
+            <h1 className='text-center font-semibold text-2xl mb-12'>Home</h1>
+            <CreatePostFeed />
+            </>
           )
         }
           {postList.length == 0 ? (

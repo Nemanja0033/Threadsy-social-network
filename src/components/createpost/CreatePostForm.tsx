@@ -8,7 +8,6 @@ import { useAnimation } from "../../hooks/useAnimation";
 const CreatePostForm = () => {
   let navigate = useNavigate();
 
-  const [title, setTitle] = useState<string>("");
   const [postData, setPostData] = useState<string>("");
   const newPostRef = useRef<HTMLDivElement | null>(null);
   const { isAuth } = useAuth();
@@ -16,7 +15,6 @@ const CreatePostForm = () => {
   const postsCollectionRef = collection(db, "posts");
   const createPost = async () => {
     await addDoc(postsCollectionRef, {
-      title,
       postData,
       author: {
         name: auth.currentUser?.displayName, 
@@ -51,7 +49,6 @@ const CreatePostForm = () => {
               <h1 className="md:text-xl text-3xl font-semibold">Create A Post</h1>
             </div>
             <div className="flex-row">
-              <input className="border-gray-700 border bg-transparent rounded shadow-sm w-full md:h-auto h-12" type="text" placeholder="Post Title . . . " onChange={(e) => {setTitle(e.target.value)}} />
               <textarea className="border-gray-700 border bg-transparent rounded shadow-sm w-full md:h-44 h-96 mt-6" placeholder="Post Text . . ." onChange={(e) => {setPostData(e.target.value)}} />
               <button onClick={createPost} className="btn btn-accent w-full text-white" >Submit</button>
             </div>
