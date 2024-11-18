@@ -45,13 +45,15 @@ const CreatePostFeed = ({}) => {
         <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">Start Post</h3>
-            <div className="modal-action">
-            <textarea onClick={() => openModal('my_modal_1')}  className='w-[80%] min-h-7 max-h-28 border bg-transparent rounded-xl' placeholder='Start a post. . .' onChange={(e) => {setPostData(e.target.value)}} />
+            <div className="modal-action flex items-center">
+            <textarea onClick={() => openModal('my_modal_1')}  className='w-[80%] min-h-32 max-h-28 border bg-transparent rounded-xl' placeholder='Start a post. . .' onChange={(e) => {setPostData(e.target.value)}} />
             <button onClick={createPost} className='btn btn-accent text-white'>Post</button>
-            <form method="dialog">
-                <button className="btn">Close</button>
-            </form>
             </div>
+            <form method="dialog">
+                <div className='flex justify-center mt-3'>
+                <button className="btn">Close</button>
+                </div>
+            </form>
         </div>
         </dialog>
     </div>
