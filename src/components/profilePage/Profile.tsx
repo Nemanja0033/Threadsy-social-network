@@ -48,7 +48,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="felx justify-center items-center mt-12" ref={porfileRef}>
+    <div className="felx justify-center items-center mt-3" ref={porfileRef}>
       {authorID === auth.currentUser?.uid && isAuth ? (
         <div className="shadow-md">
           {userData.map((user) => (
@@ -72,7 +72,9 @@ const Profile = () => {
          <div className="flex-row md:w-full w-full h-full md:mt-6 mt-0  rounded-md shadow-md">
           {userPosts.length === 0 ? (
             <div className="text-center text-xl font-bold mt-5">No posts to show</div>
-          ) : (
+          ) 
+          : 
+          (
             userPosts.map(post => (
               <PostCard
                 key={post.id}

@@ -1,8 +1,9 @@
-import { CirclePlus, House, LogOut, User } from "lucide-react";
+import { CirclePlus, House, LogOut, User, UserIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import ThemeToggler from "./ThemeToggler";
+import { auth } from "../../firebaseconfig";
 
 const Navbar = () => {
   const { isAuth, setIsAuth } = useAuth();
@@ -71,6 +72,10 @@ const Navbar = () => {
           <button onClick={handleToggleUserModal}>
             {isAuth ? <LogOut className="hover:text-primary" /> : <User className="hover:text-primary" />}
           </button>
+
+          <div className="md:ml-6 ml-3 md:hidden flex">
+            <Link to={`/profile/${auth.currentUser?.uid}`}><UserIcon /></Link>
+          </div>
 
           <div className="md:ml-6 ml-3">
             <ThemeToggler />

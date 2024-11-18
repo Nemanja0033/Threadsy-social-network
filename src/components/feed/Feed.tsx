@@ -26,6 +26,7 @@ const Feed = () => {
   }, [postList]); 
 
   useAnimation(feedRef);
+  
 
   return (
     <div className='md:flex flex-row justify-center'>

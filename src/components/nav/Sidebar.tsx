@@ -44,7 +44,7 @@ const Sidebar = () => {
       useAnimation(sidebarRef)
 
       return (
-        <div>
+        <div className="md:block hidden">
           {isAuth ? (
             loading ? (
               <span className="loading loading-spinner loading-md"></span>
