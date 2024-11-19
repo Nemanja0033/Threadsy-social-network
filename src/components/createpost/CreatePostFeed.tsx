@@ -51,7 +51,7 @@ const CreatePostFeed = ({}) => {
             </div>
             <form method="dialog">
                 <div className='flex justify-center mt-3'>
-                <button className="btn">Close</button>
+                <button className='text-gray-700'>Close</button>
                 </div>
             </form>
         </div>
