@@ -64,6 +64,7 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
   const deletePost = async (id: string) => {
     const post = doc(db, 'posts', id);
     await deleteDoc(post);
+    location.reload();
   }
 
   useEffect(() => {
