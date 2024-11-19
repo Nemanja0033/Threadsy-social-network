@@ -1,50 +1,36 @@
-# React + TypeScript + Vite
+# DevTalks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DevTalks is a social network web application, the project was created to highlight my experience and work on frontend development.
 
-Currently, two official plugins are available:
+# Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+DevTalks social network allows you to connect with people online and share opinions and interests.
 
-## Expanding the ESLint configuration
+## Features:
+ **Authentication:**
+ *Users can login & logout*
+ *All profile data are saved into database*
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+ **Posts**
+ *Users can create edit or delete post*
+ *Posts are displayed on feed or individual user profile page*
+ *Users can create post form feed & profile page (if are logged in)*
 
-- Configure the top-level `parserOptions` property like this:
+ **Interactions**
+ *Users can like & unlike post*
+ *Users can leave a comment on post*
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+ **UI Themes**
+ *Users can pick between Dark and Light theme (Dark theme are recommended)*
+ 
+##Technologies used
+**TypeScript**
+**React** 
+**Node.js**
+*React-Router-Dom*
+*Vite*
+*Firebase*
+*TailwindCSS*
+*DaisyUI*
+*GSAP*
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
