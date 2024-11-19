@@ -9,6 +9,7 @@ import { setUsersInFirestore } from "../../helpers/setUserData";
 const LoginForm = () => {
     let navigate = useNavigate();
     const { setIsAuth, setUserName } = useAuth();
+
   
     const signInWithGoogle = async () => {
       signInWithPopup(auth, provider).then(async (result) => {
@@ -16,6 +17,7 @@ const LoginForm = () => {
         setUserName(result.user.displayName || "");
         localStorage.setItem("isAuth", "true");
         localStorage.setItem("userName", result.user.displayName || "");
+        localStorage.setItem("userID", result.user.uid)
         setUsersInFirestore();
         navigate('/')
       });

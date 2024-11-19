@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import ThemeToggler from "./ThemeToggler";
-import { auth } from "../../firebaseconfig";
 
 const Navbar = () => {
   const { isAuth, setIsAuth } = useAuth();
@@ -74,7 +73,7 @@ const Navbar = () => {
 
           {isAuth ? (
             <div className="md:ml-6 ml-3 md:hidden flex">
-            <Link to={`/profile/${auth.currentUser?.uid}`}><UserIcon /></Link>
+            <Link to={`/profile/${localStorage.getItem("userID")}`}><UserIcon /></Link>
           </div>
           )
           :
