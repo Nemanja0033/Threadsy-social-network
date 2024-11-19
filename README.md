@@ -9,6 +9,7 @@ DevTalks social network allows you to connect with people online and share opini
 ## Features:
 
 ### Authentication
+- **Google Authentication (GitHub & Facebook) comming soon**
 - **Users can log in and log out**
 - **All profile data is saved into the database**
 
