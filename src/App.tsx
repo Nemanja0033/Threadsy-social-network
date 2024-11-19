@@ -7,8 +7,27 @@ import { AuthProvider } from "./context/authContext";
 import { LikeProvider } from "./context/LikeContext";
 import { CommentProvider } from "./context/CommentContext";
 import ProfilePage from "./pages/ProfilePage";
+import { useEffect, useState } from "react";
+import ScreenLoader from "./components/loader/ScreenLoader";
 
 const App = () => {
+
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const screenLoader = () => {
+      setLoading(false)
+    }
+
+    setTimeout(screenLoader, 500)
+  })
+
+  if(loading){
+    return(
+      <ScreenLoader />
+    )
+  }
+ 
   return (
     <AuthProvider>
       <LikeProvider>
