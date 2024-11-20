@@ -1,3 +1,4 @@
+
 export type PostCardType = {
     title: string,
     postData: string,
@@ -6,4 +7,5 @@ export type PostCardType = {
     id: string,
     likes: any,
     authorID: string,
+    avatar: any
 }

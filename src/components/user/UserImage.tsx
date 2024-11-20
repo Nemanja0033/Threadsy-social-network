@@ -2,7 +2,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react'
 import { db } from '../../firebaseconfig';
 
-const UserImage = ( {authorID}: {authorID: string}) => {
+const UserImage = ( {authorID}: {authorID: string | undefined}) => {
 
     const [userData, setUserData] = useState<any[]>([])
 

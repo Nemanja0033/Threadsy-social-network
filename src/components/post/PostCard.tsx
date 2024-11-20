@@ -7,9 +7,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import fetchUserNamesFromPosts from "../../helpers/getUserNames";
 import { useAuth } from "../../context/authContext";
-import UserImage from "../user/UserImage";
 
-const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCardType) => {
+const PostCard = ({ title, postData, author, date, id, likes, authorID, avatar }: PostCardType) => {
   const { isAuth } = useAuth();
   const [likesState, setLikesState] = useState<number>(likes.count);
   const [userHasLiked, setUserHasLiked] = useState<boolean>(likes.users.includes(auth.currentUser?.uid));
@@ -111,8 +110,8 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
       <div className="w-[600px] mt-6 ml-0 mr-0 flex-row rounded-xl">
         <div className="flex justify-between">
           <div className="flex-row">
-            <Link to={`/profile/${authorID}`}><h1 className="flex justify-center items-center text-md text-gray-500 font-semibold text-start ml-3 mt-3"><UserImage  authorID={authorID} /> {author}</h1></Link>
-            <h1 className="text-sm text-start text-gray-400 ml-3">{date}</h1>
+            <Link to={`/profile/${authorID}`}><h1 className="flex justify-center items-center text-md font-semibold text-start ml-3 mt-3"><span className="relative left-3 top-1">{avatar}</span> {author}</h1></Link>
+            <span className="text-xs text-start bottom-10 left-24 relative text-gray-500 ml-3">{date}</span>
           </div>
           <div className="mr-3">
           {isAuth && authorID === auth.currentUser?.uid && 
@@ -120,7 +119,7 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID }: PostCa
           </div>
         </div>
         <h1 className="text-2xl ml-3 font-semibold text-center mb-3">{title}</h1>
-        <div className="md:overflow-auto overflow-hidden max-h-44 min-h-12 w-full ml-1 mr-1 rounded text-center shadow-sm">
+        <div className="md:overflow-auto overflow-hidden max-h-44 min-h-12 w-full ml-1 mr-1 mb-3 rounded text-center shadow-sm">
           {postData}
         </div>
         <div className="w-full h-7 rounded flex justify-center gap-8 shadow-sm items-center">

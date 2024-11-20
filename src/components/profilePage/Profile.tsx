@@ -5,6 +5,7 @@ import { auth, db } from '../../firebaseconfig';
 import PostCard from '../post/PostCard';
 import gsap from "gsap";
 import { useAuth } from "../../context/authContext";
+import UserImage from "../user/UserImage";
 
 const Profile = () => {
   const { authorID } = useParams<{ authorID: string }>();
@@ -83,7 +84,9 @@ const Profile = () => {
                 postData={post.postData}
                 author={post.author.name}
                 date={post.date.toString()}
-                likes={post.likes} authorID={""}              
+                likes={post.likes} 
+                authorID={""}              
+                avatar={<UserImage authorID={post.author.id} />}
                 />
             ))
           )}

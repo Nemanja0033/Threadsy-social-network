@@ -7,6 +7,7 @@ import Sidebar from '../nav/Sidebar';
 import { useAuth } from '../../context/authContext';
 import { Link } from 'react-router-dom';
 import CreatePostFeed from '../createpost/CreatePostFeed';
+import UserImage from '../user/UserImage';
 
 const Feed = () => {
   const { isAuth } = useAuth()
@@ -67,6 +68,7 @@ const Feed = () => {
               date={post.date.toString()}
               likes={post.likes}
               authorID={post.author.id}
+              avatar={<UserImage authorID={post.author.id} />}
             />
           ))
          }
