@@ -36,8 +36,6 @@ const Profile = () => {
       const q = query(userDataCollectionRef, where("userId", "==", authorID))
       const data = await getDocs(q);
       setUserData(data.docs.map(doc =>({ ...doc.data(), id: doc.id})))
-      console.log(data.docs.map(doc =>({ ...doc.data(), id: doc.id})))
-
     }
 
     getUserData()
@@ -53,14 +51,14 @@ const Profile = () => {
       {authorID === auth.currentUser?.uid && isAuth ? (
         <div className="shadow-md">
           {userData.map((user) => (
-            <div className="flex justify-center items-center gap-2"><img className="scale-75 rounded-full" src={user.userPhoto} /><span className="text-2xl font-semibold">{user.username}</span></div>
+            <div key={Math.random()} className="flex justify-center items-center gap-2"><img className="scale-75 rounded-full" src={user.userPhoto} /><span className="text-2xl font-semibold">{user.username}</span></div>
           ))}
         </div>
       )
       :
       (
         <div className="flex justify-center items-center mt-3 shadow-md">{userData.map((user) => (
-          <div className="flex justify-center items-center gap-2"><img className="scale-75 rounded-full" src={user.userPhoto} /><span className="text-2xl font-semibold">{user.username}</span></div>
+          <div key={Math.random()} className="flex justify-center items-center gap-2"><img className="scale-75 rounded-full" src={user.userPhoto} /><span className="text-2xl font-semibold">{user.username}</span></div>
         ))}</div>
       )
     }

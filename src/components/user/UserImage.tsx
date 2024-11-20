@@ -19,7 +19,7 @@ const UserImage = ( {authorID}: {authorID: string | undefined}) => {
 
   return (
     <div>{userData.map((user) => (
-        <img key={user.userID} className='scale-50 rounded-full m-0' src={user.userPhoto} />
+        <img key={Math.random()} className='scale-50 rounded-full m-0' src={user.userPhoto} />
     ))}</div>
   )
 }
