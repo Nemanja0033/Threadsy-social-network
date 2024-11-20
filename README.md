@@ -1,50 +1,38 @@
-# React + TypeScript + Vite
+# DevTalks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**DevTalks** is a social network web application, created to highlight my experience and work in frontend development.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+DevTalks social network allows you to connect with people online and share opinions and interests.
 
-## Expanding the ESLint configuration
+## Features:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Authentication
+- **Google Authentication (GitHub & Facebook) comming soon**
+- **Users can log in and log out**
+- **All profile data is saved into the database**
 
-- Configure the top-level `parserOptions` property like this:
+### Posts
+- **Users can create, edit, or delete posts**
+- **Posts are displayed on the feed or individual user profile pages**
+- **Users can create posts from the feed & profile page (if logged in)**
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Interactions
+- **Users can like and unlike posts**
+- **Users can leave comments on posts**
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### UI Themes
+- **Users can choose between Dark and Light theme (Dark theme is recommended)**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Technologies Used
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **TypeScript**
+- **React**
+- **Node.js**
+- *React Router Dom*
+- *Vite*
+- *Firebase*
+- *TailwindCSS*
+- *DaisyUI*
+- *GSAP*
