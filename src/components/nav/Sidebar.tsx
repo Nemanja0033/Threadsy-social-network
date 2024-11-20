@@ -5,6 +5,7 @@ import { auth, db } from "../../firebaseconfig";
 import { useAnimation } from "../../hooks/useAnimation";
 import { Link } from "react-router-dom";
 import { onAuthStateChanged  } from "firebase/auth";
+import UserImage from "../user/UserImage";
 
 const Sidebar = () => {
 
@@ -52,9 +53,12 @@ const Sidebar = () => {
               <div ref={sidebarRef} className="md:w-60 w-full md:mt-20 md:mr-20 md:ml-12 md:mb-0 mb-6 mt-6 h-max-72 rounded-xl shadow-md flex justify-center">
                 <div className="w-full">
                   <h1 className="text-center text-sm text-gray-400">User Summary</h1>
-                  <h1 className="text-gray-500 text-center text-xl mb-6 mt-1">
+                  <div className="flex-row text-gray-500 text-center text-xl mb-6 mt-1">
+                    <div className="flex justify-center m-0">
+                      <UserImage authorID={localStorage.getItem("userID")} />
+                    </div>
                     {userName}
-                  </h1>
+                  </div>
                   <p className="text-gray-400 text-sm text-center">My Posts</p>
                   <div className="overflow-auto min-h-9 mt-3 max-h-32 w-full">
                     {userDetails.length > 0 ? (

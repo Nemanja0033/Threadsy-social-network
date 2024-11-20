@@ -16,6 +16,7 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID, avatar }
   const [comments, setComments] = useState<{ text: string; user: string; date: any }[]>([]);
   const [newComment, setNewComment] = useState<string>("");
   const { toggleLike } = useLikeContext();
+  
   const currentUser = auth.currentUser?.uid;
 
   const handleLike = async () => {
