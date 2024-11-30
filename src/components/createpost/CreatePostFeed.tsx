@@ -41,7 +41,7 @@ const CreatePostFeed = ({}) => {
     <>
     {isAuth ? (
         <div className='flex justify-center gap-2'>
-        <input onClick={() => openModal('my_modal_1')}  className='w-[80%] h-12 border bg-transparent rounded-2xl' placeholder='Start a post. . .' onChange={(e) => {setPostData(e.target.value)}} />
+        <input onClick={() => openModal('my_modal_1')}  className='w-[80%] h-12 border border-gray-700 bg-transparent rounded-2xl' placeholder='Start a post. . .' onChange={(e) => {setPostData(e.target.value)}} />
         <dialog id="my_modal_1" className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">Start Post</h3>

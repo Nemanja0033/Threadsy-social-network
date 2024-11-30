@@ -5,7 +5,6 @@ import { auth, db } from '../../firebaseconfig';
 import PostCard from '../post/PostCard';
 import gsap from "gsap";
 import { useAuth } from "../../context/authContext";
-import UserImage from "../user/UserImage";
 
 const Profile = () => {
   const { authorID } = useParams<{ authorID: string }>();
@@ -13,7 +12,7 @@ const Profile = () => {
   const [userData, setUserData] = useState<any[]>([]);
   const { isAuth } = useAuth() ;
   const [loading, setLoading] = useState<boolean>(true);
-  const porfileRef = useRef<HTMLDivElement | null>(null)
+  const porfileRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const getUserPosts = async () => {
@@ -33,9 +32,9 @@ const Profile = () => {
   useEffect(() => {
     const getUserData = async () => {
       const userDataCollectionRef = collection(db, "users");
-      const q = query(userDataCollectionRef, where("userId", "==", authorID))
+      const q = query(userDataCollectionRef, where("userId", "==", authorID));
       const data = await getDocs(q);
-      setUserData(data.docs.map(doc =>({ ...doc.data(), id: doc.id})))
+      setUserData(data.docs.map(doc =>({ ...doc.data(), id: doc.id})));
     }
 
     getUserData()
@@ -84,7 +83,7 @@ const Profile = () => {
                 date={post.date.toString()}
                 likes={post.likes} 
                 authorID={""}              
-                avatar={<UserImage authorID={post.author.id} />}
+                avatar={post.author.id}
                 />
             ))
           )}

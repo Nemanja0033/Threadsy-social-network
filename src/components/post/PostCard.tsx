@@ -7,13 +7,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import fetchUserNamesFromPosts from "../../helpers/getUserNames";
 import { useAuth } from "../../context/authContext";
+import UserImage from "../user/UserImage";
 
 const PostCard = ({ title, postData, author, date, id, likes, authorID, avatar }: PostCardType) => {
   const { isAuth } = useAuth();
   const [likesState, setLikesState] = useState<number>(likes.count);
   const [userHasLiked, setUserHasLiked] = useState<boolean>(likes.users.includes(auth.currentUser?.uid));
   const [userNames, setUserNames] = useState<string[]>([]);
-  const [comments, setComments] = useState<{ text: string; user: string; date: any }[]>([]);
+  const [comments, setComments] = useState<{ text: string; user: string; date: string }[]>([]);
   const [newComment, setNewComment] = useState<string>("");
   const { toggleLike } = useLikeContext();
   
@@ -110,8 +111,8 @@ const PostCard = ({ title, postData, author, date, id, likes, authorID, avatar }
     <div className="flex justify-center">
       <div className="w-[600px] mt-6 ml-0 mr-0 flex-row rounded-xl">
         <div className="flex justify-between">
-          <div className="flex-row">
-            <Link to={`/profile/${authorID}`}><h1 className="flex justify-center items-center text-md font-semibold text-start ml-3 mt-3"><span className="relative left-3 top-1">{avatar}</span> {author}</h1></Link>
+          <div className="flex-row h-28">
+            <Link to={`/profile/${authorID}`}><h1 className="flex justify-center items-center text-md font-semibold text-start ml-3 mt-3"><span className="relative left-3 top-1"><UserImage authorID={avatar} /></span> {author}</h1></Link>
             <span className="text-xs text-start bottom-10 left-24 relative text-gray-500 ml-3">{date}</span>
           </div>
           <div className="mr-3">

@@ -32,15 +32,15 @@ const Navbar = () => {
   }
 
   return (
-    <div className="w-full bg-base-100 flex md:justify-evenly items-center h-[60px] sticky top-0 z-50 shadow-md  rounded-md">
+    <div className="w-full bg-base-100 flex md:justify-center items-center h-[60px] sticky top-0 z-50 shadow-md  rounded-md">
       <div className="md:ml-32 ml-3 flex items-center cursor-pointer">
         <img onClick={handleClick} src="/logo/logo.png" className="md:w-1/3 w-1/3" alt="logo" />
       </div>
-      <div className="md:mr-32 mr-3 flex md:gap-8 gap-4 relative items-center">
-        <Link to={'/'}><House className="hover:text-primary" /></Link>
+      <div className={`${isAuth ? 'md:mr-52' : 'md:mr-96'} mr-3 flex md:gap-32 gap-4 relative items-center`}>
+        <Link to={'/'}><House className="hover:text-primary hidden md:flex" /></Link>
 
         {isAuth ? (
-          <div className="relative flex">
+          <div className="md:relative hidden md:flex ">
           <button onClick={handleToggleCreateModal}>
             <CirclePlus className="hover:text-primary" />
           </button>
@@ -66,13 +66,12 @@ const Navbar = () => {
       
       }
 
-        <div className="flex">
           <button onClick={handleToggleUserModal}>
             {isAuth ? <LogOut className="hover:text-primary" /> : <User className="hover:text-primary" />}
           </button>
 
           {isAuth ? (
-            <div className="md:ml-6 ml-3 md:hidden flex">
+            <div className="hidden md:flex">
             <Link to={`/profile/${localStorage.getItem("userID")}`}><UserIcon /></Link>
           </div>
           )
@@ -82,7 +81,7 @@ const Navbar = () => {
           )
         }
 
-          <div className="md:ml-6 ml-3">
+          <div className="md:ml-6 ml-3 border-l pl-3 border-gray-700">
             <ThemeToggler />
           </div>
 
@@ -106,7 +105,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-    </div>
   );
 };
 

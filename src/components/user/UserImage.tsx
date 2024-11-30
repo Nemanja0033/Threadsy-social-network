@@ -4,18 +4,18 @@ import { db } from '../../firebaseconfig';
 
 const UserImage = ( {authorID}: {authorID: any}) => {
 
-    const [userData, setUserData] = useState<any[]>([])
+    const [userData, setUserData] = useState<any[]>([]);
 
     useEffect(() => {
         const getUserData = async () => {
           const userDataCollectionRef = collection(db, "users");
-          const q = query(userDataCollectionRef, where("userId", "==", authorID))
+          const q = query(userDataCollectionRef, where("userId", "==", authorID));
           const data = await getDocs(q);
-          setUserData(data.docs.map(doc =>({ ...doc.data(), id: doc.id})))    
+          setUserData(data.docs.map(doc =>({ ...doc.data(), id: doc.id}))); 
         }
     
-        getUserData()
-      }, [])
+        getUserData();
+      }, []);
 
   return (
     <div>{userData.map((user) => (

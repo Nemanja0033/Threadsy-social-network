@@ -9,6 +9,7 @@ import { CommentProvider } from "./context/CommentContext";
 import ProfilePage from "./pages/ProfilePage";
 import { useEffect, useState } from "react";
 import ScreenLoader from "./components/loader/ScreenLoader";
+import SmNavbar from "./components/nav/SmNavbar";
 
 const App = () => {
 
@@ -19,7 +20,7 @@ const App = () => {
       setLoading(false)
     }
 
-    setTimeout(screenLoader, 500)
+    setTimeout(screenLoader, 400)
   })
 
   if(loading){
@@ -40,6 +41,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/profile/:authorID" element={<ProfilePage />} />
             </Routes>
+            <SmNavbar />
           </Router>
         </CommentProvider>
       </LikeProvider>
