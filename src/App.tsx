@@ -3,16 +3,16 @@ import CreatePost from "./pages/CreatePost";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./components/nav/Navbar";
-import { AuthProvider } from "./context/authContext";
 import { LikeProvider } from "./context/LikeContext";
 import { CommentProvider } from "./context/CommentContext";
 import ProfilePage from "./pages/ProfilePage";
 import { useEffect, useState } from "react";
 import ScreenLoader from "./components/loader/ScreenLoader";
 import SmNavbar from "./components/nav/SmNavbar";
+import { useAuth } from "./context/authContext";
 
 const App = () => {
-
+  const { isAuth } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -30,13 +30,12 @@ const App = () => {
   }
  
   return (
-    <AuthProvider>
       <LikeProvider>
         <CommentProvider>
           <Router>
-            <Navbar />
+            {isAuth ? <Navbar /> : ''}
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={isAuth ? <Home /> : <Login />} />
               <Route path="/createpost" element={<CreatePost />} />
               <Route path="/login" element={<Login />} />
               <Route path="/profile/:authorID" element={<ProfilePage />} />
@@ -45,7 +44,6 @@ const App = () => {
           </Router>
         </CommentProvider>
       </LikeProvider>
-    </AuthProvider>
   );
 };
 

@@ -16,6 +16,7 @@ const Feed = () => {
   const postsCollectionRef = collection(db, "posts");
 
   useEffect(() => {
+    document.title = 'Threadsy | Feed'
     const getPosts = async () => {
       const q = query(postsCollectionRef, orderBy("createdAt", "desc"));
       const data = await getDocs(q);

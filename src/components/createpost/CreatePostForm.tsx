@@ -37,7 +37,7 @@ const CreatePostForm = () => {
   };
 
   useEffect(() => {
-    document.title = 'Dev Talks | Create a New Post';
+    document.title = 'Threadsy | Create a New Post';
   }, []);
 
   useAnimation(newPostRef);

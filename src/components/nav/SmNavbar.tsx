@@ -13,7 +13,7 @@ const SmNavbar = () => {
     };
     
   return (
-    <div className="md:hidden fixed bottom-0 z-50 bg-base-100 w-full h-[70px] flex justify-around items-center gap-4">
+    <div className={`md:hidden ${!isAuth ? 'hidden' : 'fixed'} bottom-0 z-50 bg-base-100 w-full h-[70px] flex justify-around items-center gap-4`}>
         <Link to={'/'}>
             <Home className="cursor-pointer hover:text-primary" />
         </Link>
