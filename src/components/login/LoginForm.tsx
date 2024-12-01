@@ -39,7 +39,7 @@ const LoginForm = () => {
             <h1 className="font-semibold md:text-5xl text-5xl">Threadsy</h1>
           </div>
           <div className="flex justify-center items-center">
-            <h1 className="text-xl tracking-wide">We provide fast and secure network just for you!</h1>
+            <h1 className="text-xl tracking-wide text-center">Connect with friend on Threadsy a lightweight soical network!</h1>
           </div>
           <div className="flex justify-center mt-6">
             <button onClick={signInWithGoogle} className="btn md:w-full w-[80%] btn-accent text-white md:btn-sm btn-lg">

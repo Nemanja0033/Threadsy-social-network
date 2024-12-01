@@ -6,6 +6,7 @@ import { useAnimation } from "../../hooks/useAnimation";
 import { Link } from "react-router-dom";
 import { onAuthStateChanged  } from "firebase/auth";
 import UserImage from "../user/UserImage";
+import { PodcastIcon } from "lucide-react";
 
 const Sidebar = () => {
 
@@ -59,7 +60,7 @@ const Sidebar = () => {
                     </div>
                     {userName}
                   </div>
-                  <p className="text-gray-400 text-sm text-center">My Posts</p>
+                  <span className="text-gray-400 text-sm flex justify-self-center items-center"><PodcastIcon />My Posts</span>
                   <div className="overflow-auto min-h-9 mt-3 max-h-32 w-full">
                     {userDetails.length > 0 ? (
                       userDetails.map((user, index) => (
