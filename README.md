@@ -1,10 +1,10 @@
-# DevTalks
+# Threadsy
 
-**DevTalks** is a social network web application, created to highlight my experience and work in frontend development.
+**Threadsys** is a social network web application, created to highlight my experience and work in frontend development.
 
 ## Overview
 
-DevTalks social network allows you to connect with people online and share opinions and interests.
+Threadsy social network allows you to connect with people online and share opinions and interests.
 
 ## Features:
 
